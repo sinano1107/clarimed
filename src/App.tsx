@@ -8,7 +8,7 @@ import SpeechRecognition, {
 // import { cmp_noun_list } from "./gensenweb-kuromojijs";
 
 const kuromojiBuilder = kuromoji.builder({
-  dicPath: "../dict",
+  dicPath: "../kuromoji/dict",
 });
 
 const App = () => {
