@@ -2,6 +2,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import useGensen from "./hooks/useGensen";
+import { useEffect } from "react";
 
 const App = () => {
   const { script, tokens, setScript } = useGensen();
@@ -15,6 +16,8 @@ const App = () => {
     // @ts-ignore
     browserSupportsContinuousListening,
   } = useSpeechRecognition();
+
+  useEffect(() => setScript(transcript), [transcript, setScript]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
@@ -40,12 +43,11 @@ const App = () => {
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
       <button onClick={resetTranscript}>Reset</button>
       <textarea onChange={(e) => setScript(e.target.value)} />
-      <p>{transcript}</p>
       <div>
         {tokens.map((token, index) => (
           <span
+            className={token.term === null ? "normal-text" : "term-text"}
             key={token.string + index}
-            style={{ color: token.term !== null ? "blue" : "" }}
             onClick={() => {
               if (token.term === null) return;
               const prompt = `医師に「${script}」と説明を受けましたが「${token.term}」の意味がわかりません。わかりやすく説明してください`;

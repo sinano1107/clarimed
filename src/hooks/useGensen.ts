@@ -27,18 +27,13 @@ const useGensen = () => {
         return { string: word.surface_form, term: null };
       });
 
-      console.log(score_lt_list)
-
       for (let i = 0; i < score_lt_list.length; i++) {
         const score_lt = score_lt_list[i];
-        console.log(score_lt)
 
         const tokenized = score_lt.cmp_noun.split(" ");
-        console.log(tokenized);
 
         for (let j = 0; j < tokens.length - tokenized.length + 1; j++) {
           const sliced = tokens.slice(j, j + tokenized.length)
-          console.log(sliced);
           if (sliced.some(s => s.term !== null)) continue;
           if (sliced.every((s, i) => s.string === tokenized[i])) {
             const term = modify_agglutinative_lang(score_lt.cmp_noun);
@@ -52,7 +47,7 @@ const useGensen = () => {
       console.log(tokens)
 
       const lastChar = script[-1];
-      if (lastChar === "。" || lastChar === ".") {
+      if (lastChar === " ") {
         prevEndIndex += script.length;
       }
     })
