@@ -2,7 +2,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import useGensen from "./hooks/useGensen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const { script, tokens, setScript } = useGensen();
@@ -15,6 +15,22 @@ const App = () => {
     // @ts-ignore
     browserSupportsContinuousListening,
   } = useSpeechRecognition();
+
+  const [isHackMode, setIsHackMode] = useState(false);
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsHackMode((prev) => !prev);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   useEffect(() => setScript(transcript), [transcript, setScript]);
 
@@ -78,6 +94,7 @@ const App = () => {
             style={{ width: 52 }}
           />
         </button>
+        {isHackMode && <textarea onChange={(e) => setScript(e.target.value)} />}
       </div>
     </>
   );
