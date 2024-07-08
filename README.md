@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# 動かし方
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. nodeをインストールする
+ターミナルに「brew install node」と入力する。
+「node -v」と入力して、バージョン番号が出力されていれば正常にインストールできている。
 
-Currently, two official plugins are available:
+2. ソースコードをインストールする
+https://github.com/sinano1107/clarimed
+このリンクの緑色のボタンを押して、Download zipを押す。
+ダウンロードしたファイルを展開する。
+展開したフォルダにcdして、「npm install」と入力する。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. ローカルサーバーで実行
+「npm run dev」と入力すると、ローカルサーバーでclarimedが動作する。
+青く表示されているリンクに移動すると、見えるはず！
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+ソースコードが更新された時
+新しいソースコードをインストールして、「npm install」を実行する。
+そうして「npm run dev」を動かせば動く。
