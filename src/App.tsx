@@ -11,6 +11,7 @@ const App = () => {
     transcript,
     listening,
     browserSupportsSpeechRecognition,
+    resetTranscript,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     browserSupportsContinuousListening,
@@ -74,6 +75,7 @@ const App = () => {
             if (listening) {
               SpeechRecognition.stopListening();
             } else {
+              resetTranscript();
               if (browserSupportsContinuousListening) {
                 SpeechRecognition.startListening({
                   language: "ja",
@@ -94,7 +96,12 @@ const App = () => {
             style={{ width: 52 }}
           />
         </button>
-        {isHackMode && <textarea onChange={(e) => setScript(e.target.value)} />}
+        {isHackMode && (
+          <textarea
+            value={script}
+            onChange={(e) => setScript(e.target.value)}
+          />
+        )}
       </div>
     </>
   );
